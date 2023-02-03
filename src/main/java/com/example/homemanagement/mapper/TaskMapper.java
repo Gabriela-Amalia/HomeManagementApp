@@ -11,7 +11,8 @@ public class TaskMapper {
     public Task createTaskDtoToTask(CreateTaskDto createTaskDto) {
         return new Task(
                 createTaskDto.getTitle(),
-                createTaskDto.getDescription()
+                createTaskDto.getDescription(),
+                createTaskDto.getHousehold()
         );
     }
 
@@ -19,7 +20,8 @@ public class TaskMapper {
         return new Task(updateTaskDto.getId(),
                 updateTaskDto.getTitle(),
                 updateTaskDto.getDescription(),
+                updateTaskDto.isDone(),
                 updateTaskDto.getMember(),
-                updateTaskDto.isDone());
+                updateTaskDto.getHousehold());
     }
 }

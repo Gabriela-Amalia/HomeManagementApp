@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findByMember_Household_Id(long householdId);
+    List<Task> findByHousehold_Id(long householdId);
 
     List<Task> findByMember_Id(Long memberId);
 
-    List<Task> findByMember_Household_IdAndMember_Id(long householdId, long memberId);
+    List<Task> findByHousehold_IdAndMember_Id(long householdId, long memberId);
 
 
 }

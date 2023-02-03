@@ -36,9 +36,9 @@ public class TaskService {
 
         if(householdId != null) {
             if(memberId != null) {
-                tasks = taskRepository.findByMember_Household_IdAndMember_Id(householdId, memberId);
+                tasks = taskRepository.findByHousehold_IdAndMember_Id(householdId, memberId);
             } else {
-                tasks = taskRepository.findByMember_Household_Id(householdId);
+                tasks = taskRepository.findByHousehold_Id(householdId);
             }
         } else {
             if(memberId != null) {

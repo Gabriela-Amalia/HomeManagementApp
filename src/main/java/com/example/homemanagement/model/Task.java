@@ -20,21 +20,27 @@ public class Task {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    private Household household;
+
     public Task() {
     }
 
-    public Task(String title, String description) {
+    public Task(String title, String description, Household  household) {
         this.title = title;
         this.description = description;
         this.isDone = false;
+        this.household = household;
     }
 
-    public Task(long id, String title, String description, Member member, boolean isDone) {
+    public Task(long id, String title, String description, boolean isDone, Member member, Household household) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.member = member;
         this.isDone = isDone;
+        this.member = member;
+        this.household = household;
     }
 
     public long getId() {
@@ -75,5 +81,13 @@ public class Task {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 }

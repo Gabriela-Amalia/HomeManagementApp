@@ -19,9 +19,11 @@ create table if not exists tasks (
     id int not null primary key auto_increment,
     title varchar(100) not null,
     description varchar(100) not null,
-    isDone boolean not null default 0,
+    is_done boolean not null default 0,
     member_id int,
-    FOREIGN KEY (member_id) REFERENCES members(id)
+    FOREIGN KEY (member_id) REFERENCES members(id),
+    household_id int,
+    FOREIGN KEY (household_id) REFERENCES households(id)
     );
 
 

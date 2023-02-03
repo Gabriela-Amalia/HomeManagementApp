@@ -1,5 +1,6 @@
 package com.example.homemanagement.dto.task;
 
+import com.example.homemanagement.model.Household;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -13,12 +14,15 @@ public class CreateTaskDto {
     @Size(max = 500)
     private String description;
 
+    private Household household;
+
     public CreateTaskDto() {
     }
 
-    public CreateTaskDto(String title, String description) {
+    public CreateTaskDto(String title, String description, Household  household) {
         this.title = title;
         this.description = description;
+        this.household = household;
     }
 
     public String getTitle() {
@@ -35,5 +39,13 @@ public class CreateTaskDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 }

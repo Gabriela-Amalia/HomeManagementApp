@@ -1,5 +1,6 @@
 package com.example.homemanagement.dto.task;
 
+import com.example.homemanagement.model.Household;
 import com.example.homemanagement.model.Member;
 
 public class UpdateTaskDto extends CreateTaskDto{
@@ -13,8 +14,8 @@ public class UpdateTaskDto extends CreateTaskDto{
     public UpdateTaskDto() {
     }
 
-    public UpdateTaskDto(String title, String description, long id, boolean isDone, Member member) {
-        super(title, description);
+    public UpdateTaskDto(String title, String description, long id, boolean isDone, Member member, Household household) {
+        super(title, description, household);
         this.id = id;
         this.member = member;
         this.isDone = isDone;
