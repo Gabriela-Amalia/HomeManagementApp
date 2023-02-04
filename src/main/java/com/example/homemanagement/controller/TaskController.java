@@ -3,6 +3,7 @@ package com.example.homemanagement.controller;
 import com.example.homemanagement.dto.task.CreateTaskDto;
 import com.example.homemanagement.dto.task.UpdateTaskDto;
 import com.example.homemanagement.mapper.TaskMapper;
+import com.example.homemanagement.model.Member;
 import com.example.homemanagement.model.Task;
 import com.example.homemanagement.service.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,27 @@ public class TaskController {
         Task updatedTask = taskService.update(task);
         return ResponseEntity.ok()
                 .body(updatedTask);
+    }
+
+    @PutMapping()
+    public ResponseEntity<Task> updateTaskMember(
+            @RequestParam(required = true)
+            Long taskId,
+            @RequestParam(required = true)
+            Long memberId) {
+
+        Task task = taskService.assign(taskId, memberId);
+        return ResponseEntity.ok()
+                .body(task);
+    }
+
+    @PutMapping("finishTask/{id}")
+    public ResponseEntity<Task> finishTask(
+            @PathVariable
+            long id) {
+        Task task = taskService.finishTask(id);
+        return ResponseEntity.ok()
+                .body(task);
     }
 
     @GetMapping

@@ -57,6 +57,18 @@ public class MemberController {
                 .body(updatedMember);
     }
 
+    @PutMapping()
+    public ResponseEntity<Member> updateMemberHousehold(
+            @RequestParam(required = true)
+            Long memberId,
+            @RequestParam(required = true)
+            Long houseId) {
+
+        Member member = memberService.assign(memberId, houseId);
+        return ResponseEntity.ok()
+                .body(member);
+    }
+
     @GetMapping
     public List<Member> get(
             @RequestParam(required = false)

@@ -1,8 +1,11 @@
 package com.example.homemanagement.service;
 
+import com.example.homemanagement.exception.household.HouseholdNotFoundException;
 import com.example.homemanagement.exception.member.MemberAlreadyExistsException;
 import com.example.homemanagement.exception.member.MemberNotFoundException;
+import com.example.homemanagement.model.Household;
 import com.example.homemanagement.model.Member;
+import com.example.homemanagement.repository.HouseholdRepository;
 import com.example.homemanagement.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
+    private final HouseholdRepository householdRepository;
+
+    public MemberService(MemberRepository memberRepository, HouseholdRepository householdRepository) {
         this.memberRepository = memberRepository;
+        this.householdRepository = householdRepository;
     }
 
 
@@ -39,6 +45,13 @@ public class MemberService {
             throw new MemberAlreadyExistsException();
         }
 
+        return memberRepository.save(member);
+    }
+
+    public Member assign(long memberId, long householdId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new MemberNotFoundException());
+        Household household = householdRepository.findById(householdId).orElseThrow(() -> new HouseholdNotFoundException(householdId));
+        member.setHousehold(household);
         return memberRepository.save(member);
     }
 
