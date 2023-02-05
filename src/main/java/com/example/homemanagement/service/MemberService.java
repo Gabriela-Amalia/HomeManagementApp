@@ -74,8 +74,15 @@ public class MemberService {
         return members;
     }
 
+    public Optional<Member> get(long id) {
+        if(!memberRepository.existsById(id)) {
+            throw new MemberNotFoundException();
+        }
+        Optional<Member> member = memberRepository.findById(id);
+        return member;
+    }
+
     public List<Member> getFromHousehold(Long householdId) {
-        System.out.println(householdId);
         if(householdId != null)
             return memberRepository.findByHousehold_Id(householdId);
         else

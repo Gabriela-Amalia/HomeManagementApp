@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/members")
@@ -74,5 +75,14 @@ public class MemberController {
             @RequestParam(required = false)
             Long householdId) {
         return memberService.getFromHousehold(householdId);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Member>> get(
+            @PathVariable
+            long id) {
+        Optional<Member> member = memberService.get(id);
+        return ResponseEntity.ok()
+                .body(member);
     }
 }
