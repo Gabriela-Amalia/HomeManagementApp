@@ -23,7 +23,8 @@ create table if not exists tasks (
     member_id int,
     FOREIGN KEY (member_id) REFERENCES members(id),
     household_id int,
-    FOREIGN KEY (household_id) REFERENCES households(id)
+    FOREIGN KEY (household_id) REFERENCES households(id),
+    priority ENUM('HIGH', 'MEDIUM', 'LOW')
     );
 
 

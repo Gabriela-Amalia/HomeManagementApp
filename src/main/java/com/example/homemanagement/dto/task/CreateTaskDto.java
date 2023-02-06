@@ -1,6 +1,7 @@
 package com.example.homemanagement.dto.task;
 
 import com.example.homemanagement.model.Household;
+import com.example.homemanagement.model.Priority;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -16,13 +17,16 @@ public class CreateTaskDto {
 
     private Household household;
 
+    private Priority priority;
+
     public CreateTaskDto() {
     }
 
-    public CreateTaskDto(String title, String description, Household  household) {
+    public CreateTaskDto(String title, String description, Household  household, Priority priority) {
         this.title = title;
         this.description = description;
         this.household = household;
+        this.priority = priority;
     }
 
     public String getTitle() {
@@ -47,5 +51,13 @@ public class CreateTaskDto {
 
     public void setHousehold(Household household) {
         this.household = household;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
