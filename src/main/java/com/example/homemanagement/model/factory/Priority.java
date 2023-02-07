@@ -1,4 +1,4 @@
-package com.example.homemanagement.model;
+package com.example.homemanagement.model.factory;
 
 public enum Priority {
     HIGH,

@@ -3,7 +3,7 @@ package com.example.homemanagement.controller;
 import com.example.homemanagement.dto.task.CreateTaskDto;
 import com.example.homemanagement.dto.task.UpdateTaskDto;
 import com.example.homemanagement.mapper.TaskMapper;
-import com.example.homemanagement.model.Task;
+import com.example.homemanagement.model.factory.Task;
 import com.example.homemanagement.observerPattern.EmailObserver;
 import com.example.homemanagement.observerPattern.EmailSender;
 import com.example.homemanagement.service.TaskService;
@@ -71,6 +71,7 @@ public class TaskController {
         Task task = taskService.assign(taskId, memberId);
 
         emailObserver.setRecipientEmail(task.getMember().getEmail());
+        emailObserver.setMessage(task.getEmailMessage());
         emailSender.notifyObservers();
 
         return ResponseEntity.ok()

@@ -2,7 +2,7 @@ package com.example.homemanagement.dto.task;
 
 import com.example.homemanagement.model.Household;
 import com.example.homemanagement.model.Member;
-import com.example.homemanagement.model.Priority;
+import com.example.homemanagement.model.factory.Priority;
 
 public class UpdateTaskDto extends CreateTaskDto{
 

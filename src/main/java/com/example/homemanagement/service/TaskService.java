@@ -1,11 +1,10 @@
 package com.example.homemanagement.service;
 
-import com.example.homemanagement.exception.household.HouseholdNotFoundException;
 import com.example.homemanagement.exception.member.MemberNotFoundException;
+import com.example.homemanagement.exception.task.CanNotAssignTaskException;
 import com.example.homemanagement.exception.task.TaskNotFoundException;
-import com.example.homemanagement.model.Household;
 import com.example.homemanagement.model.Member;
-import com.example.homemanagement.model.Task;
+import com.example.homemanagement.model.factory.Task;
 import com.example.homemanagement.repository.MemberRepository;
 import com.example.homemanagement.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +40,11 @@ public class TaskService {
     public Task assign(long taskId, long memberId) {
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(taskId));
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new MemberNotFoundException());
+
+        List<Task> allTasksOfMember = taskRepository.findByMember_IdAndIsDone(memberId, false);
+        if (!task.canAssign(allTasksOfMember)) {
+            throw new CanNotAssignTaskException();
+        }
 
         task.setMember(member);
         return taskRepository.save(task);

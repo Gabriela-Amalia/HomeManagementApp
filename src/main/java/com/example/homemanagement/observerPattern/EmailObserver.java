@@ -11,16 +11,21 @@ public class EmailObserver implements Observer {
     private static final String SENDGRID_API_KEY = "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";
     private String recipientEmail;
 
+    private String message;
+
     public void setRecipientEmail(String recipientEmail) {
         this.recipientEmail = recipientEmail;
     }
+
+    public void setMessage(String message) { this.message = message; }
 
     @Override
     public void update() {
         Email from = new Email("personalAppTesting@gmail.com");
         Email toEmail = new Email(recipientEmail);
-        Content emailContent = new Content("text/plain", "Message");
-        Mail mail = new Mail(from, "Subject", toEmail, emailContent);
+        String subject = "You were assigned to a task";
+        Content emailContent = new Content("text/plain", message);
+        Mail mail = new Mail(from, subject, toEmail, emailContent);
 
         SendGrid sg = new SendGrid(SENDGRID_API_KEY);
         Request request = new Request();

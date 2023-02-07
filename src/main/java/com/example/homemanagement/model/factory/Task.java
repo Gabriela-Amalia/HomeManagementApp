@@ -1,10 +1,14 @@
-package com.example.homemanagement.model;
+package com.example.homemanagement.model.factory;
 
+import com.example.homemanagement.model.Household;
+import com.example.homemanagement.model.Member;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public abstract class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,21 +28,16 @@ public class Task {
     @JoinColumn(name = "household_id")
     private Household household;
 
-    @Enumerated(EnumType.STRING)
-    private Priority priority;
+    public static int maximumNumberOfTasks;
 
-    public Task() {
-    }
-
-    public Task(String title, String description, Household  household, Priority priority) {
+    public Task(String title, String description, Household  household) {
         this.title = title;
         this.description = description;
         this.isDone = false;
         this.household = household;
-        this.priority = priority;
     }
 
-    public Task(long id, String title, String description, boolean isDone, Member member, Household household, Priority priority) {
+    public Task(long id, String title, String description, boolean isDone, Member member, Household household) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -95,11 +94,7 @@ public class Task {
         this.household = household;
     }
 
-    public Priority getPriority() {
-        return priority;
-    }
+    public abstract String getEmailMessage();
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
+    public abstract boolean canAssign(List<Task> tasks);
 }
